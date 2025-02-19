@@ -7,7 +7,9 @@
 #include<map> 
 #include<queue> 
 #include<stack> 
-#include<string> 
+#include<string> //string IS a container (data structure) 
+#include<set>
+#include<unordered_map>
 
 
 void demoList()
@@ -66,14 +68,68 @@ void demoMap()
         << " is " << wordsToTheirMeanings[desiredWord] << "\n";
 }
 
-//try throw catch 
+/*This function will read The Jabberwock (a nonsense poem by Lewis Carroll)
+AND it counts the number of occurrences of each word in the poem*/
+void doAnotherDemoOfTheGloriousMapContainer()
+{
+    std::ifstream fin{ "C:/Users/Work/Desktop/jabberwocky.txt" }; //NOTE: Windows filenames aren't case sensitive
 
+    if (!fin)
+    {
+        throw std::exception("Unable to find file"); 
+        return; 
+    }
+
+    std::map<std::string, int> wordsMappedToTheirNumberOfOccurences; 
+
+    std::string currentWord; 
+    while (std::getline(fin, currentWord, ' '))
+    {
+        //std::cout << currentWord << "\n";
+        wordsMappedToTheirNumberOfOccurences[currentWord]++;
+    }
+
+    fin.close(); 
+    //this is (one method) of printing the elements in a map (key-value pairs): 
+    for (const auto& currentPair : wordsMappedToTheirNumberOfOccurences)
+    {
+        std::cout << currentPair.first << " occurs this many times: " << currentPair.second << "\n";
+    }
+
+}
+ 
+void demoSet()
+{
+    std::set<int> someUNIQUEnums =
+    {
+        1, 1,
+        2,
+        3,
+        4,
+        5
+    };
+
+    std::cout << "The number of elements in this set is: " << someUNIQUEnums.size() << "\n";
+}
 
 int main()
 {
-    //demoList(); 
-    demoMap(); 
 
+    demoSet(); 
+
+    //demoList(); 
+    //demoMap(); 
+
+
+    //try
+    //{
+    //    doAnotherDemoOfTheGloriousMapContainer(); 
+    //}
+
+    //catch (const std::exception& e)
+    //{
+    //    std::cout << e.what() << "\n";
+    //}
 
     //std::cout << "Hello World!\n";
 }
